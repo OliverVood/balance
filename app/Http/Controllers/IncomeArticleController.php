@@ -9,30 +9,44 @@ class IncomeArticleController extends Controller
 {
     public function index() {
         $articles = IncomeArticle::all();
-        return view('incomes/incomes', compact('articles'));
+        return view('income_articles.index', compact('articles'));
+    }
+
+    public function show(IncomeArticle $article) {
+        return view('income_articles.show', compact('article'));
     }
 
     public function create() {
-        $article = [
-            'name' => 'Name 3',
-            'description' => 'Desc 3',
-        ];
-
-        IncomeArticle::create($article);
+        return view('income_articles.create');
     }
 
-    protected function update() {
-        $label = IncomeArticle::find(2);
+    public function edit(IncomeArticle $article) {
+        return view('income_articles.edit', compact('article'));
+    }
 
-        $label->update([
-            'name' => 'update Name 1',
-            'description' => 'update Desc 2',
+    public function store() {
+        $data = \request()->validate([
+            'name' => 'string',
+            'description' => 'string'
         ]);
+        IncomeArticle::create($data);
+
+        return redirect()->route('income_article.index');
     }
 
-    protected function delete() {
-        $label = IncomeArticle::find(2);
+    protected function update(IncomeArticle $article) {
+        $data = \request()->validate([
+            'name' => 'string',
+            'description' => 'string'
+        ]);
+        $article->update($data);
 
-        $label->delete();
+        return redirect()->route('income_article.show', $article->id);
+    }
+
+    protected function destroy(IncomeArticle $article) {
+        $article->delete();
+
+        return redirect()->route('income_article.index');
     }
 }

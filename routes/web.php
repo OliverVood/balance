@@ -21,13 +21,8 @@ Route::get('/', function () {
 
 Route::get('/income_articles', [IncomeArticleController::class, 'index'])->name('income_article.index');
 Route::get('/income_articles/create', [IncomeArticleController::class, 'create'])->name('income_article.create');
-Route::get('/income_articles/update', [IncomeArticleController::class, 'update'])->name('income_article.update');
-Route::get('income_articles/delete', [IncomeArticleController::class, 'delete'])->name('income_article.delete');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/income_articles', [IncomeArticleController::class, 'store'])->name('income_article.store');
+Route::get('/income_articles/{article}', [IncomeArticleController::class, 'show'])->name('income_article.show');
+Route::get('/income_articles/{article}/edit', [IncomeArticleController::class, 'edit'])->name('income_article.edit');
+Route::patch('/income_articles/{article}', [IncomeArticleController::class, 'update'])->name('income_article.update');
+Route::delete('/income_articles/{article}', [IncomeArticleController::class, 'destroy'])->name('income_article.delete');

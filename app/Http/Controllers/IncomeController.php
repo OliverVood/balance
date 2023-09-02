@@ -2,45 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Label;
+use App\Models\Income;
+use App\Models\IncomeArticle;
 use Illuminate\Http\Request;
 
 class IncomeController extends Controller
 {
     public function index() {
-//        $label = Label::find(1);
-        $articles = Label::all();
-//        $labels = Label::where('state', Label::STATE_ACTIVE)->first();
-//        $labels = Label::where('state', Label::STATE_ACTIVE)->get();
-        foreach ($articles as $article) dump($article->name);
-        dump($articles);
+        $incomes = Income::all();
+        return view('incomes.index', compact('incomes'));
+    }
+
+    public function show(Income $income) {
+//        dd($income->article);
+        return view('incomes.show', compact('income'));
     }
 
     public function create() {
-        $label = [
-            'name' => 'Name 3',
-            'description' => 'Desc 3',
-//            'color' => '123000000',
-        ];
-
-        Label::create($label);
+        $articles = IncomeArticle::all();
+        return view('incomes.create', compact('articles'));
     }
 
-    protected function update() {
-        $label = Label::find(2);
+    public function edit(Income $income) {
+        $articles = IncomeArticle::all();
+        return view('incomes.edit', compact('income', 'articles'));
+    }
 
-        $label->update([
-            'name' => 'update Name 1',
-            'description' => 'update Desc 2',
-//            'color' => '123432000'
+    public function store() {
+        $data = \request()->validate([
+            'article_id' => 'integer',
+            'amount' => 'numeric'
         ]);
+        Income::create($data);
+
+        return redirect()->route('income.index');
     }
 
-    protected function delete() {
-        $label = Label::find(2);
-//        $label = Label::withTrashed()->find(2);
-//        $label->restore();
+    public function update(Income $income) {
+        $data = \request()->validate([
+            'article_id' => 'integer',
+            'amount' => 'numeric'
+        ]);
+        $income->update($data);
 
-        $label->delete();
+        return redirect()->route('income.show', $income->id);
+    }
+
+    public function destroy(Income $article) {
+        $article->delete();
+
+        return redirect()->route('income.index');
     }
 }

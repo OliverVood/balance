@@ -13,4 +13,12 @@ class IncomeArticle extends Model
 
     protected $table = 'income_articles';
     protected $guarded = [];
+
+    public function incomes() {
+        return $this->hasMany(Income::class, 'article_id', 'id');
+    }
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class, 'income_article_tags', 'article_id', 'tag_id');
+    }
 }

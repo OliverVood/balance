@@ -13,6 +13,8 @@ class IncomeArticleController extends Controller
     }
 
     public function show(IncomeArticle $article) {
+//        dd($article->incomes);
+//        dd($article->tags);
         return view('income_articles.show', compact('article'));
     }
 

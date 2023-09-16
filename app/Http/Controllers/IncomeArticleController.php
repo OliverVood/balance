@@ -31,8 +31,8 @@ class IncomeArticleController extends Controller
 
     public function store() {
         $data = \request()->validate([
-            'name' => 'string',
-            'description' => 'string',
+            'name' => 'required|string',
+            'description' => '',
             'tags' => '',
         ]);
 
@@ -53,8 +53,8 @@ class IncomeArticleController extends Controller
 
     protected function update(IncomeArticle $article) {
         $data = \request()->validate([
-            'name' => 'string',
-            'description' => 'string',
+            'name' => 'required|string',
+            'description' => '',
             'tags' => '',
         ]);
 

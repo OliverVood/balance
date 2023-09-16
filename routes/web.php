@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Income;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncomeArticleController;
 use App\Http\Controllers\IncomeController;
@@ -27,10 +28,13 @@ Route::get('/income_articles/{article}/edit', [IncomeArticleController::class, '
 Route::patch('/income_articles/{article}', [IncomeArticleController::class, 'update'])->name('income_article.update');
 Route::delete('/income_articles/{article}', [IncomeArticleController::class, 'destroy'])->name('income_article.delete');
 
-Route::get('/incomes', [IncomeController::class, 'index'])->name('income.index');
-Route::get('/incomes/create', [IncomeController::class, 'create'])->name('income.create');
-Route::post('/incomes', [IncomeController::class, 'store'])->name('income.store');
-Route::get('/incomes/{income}', [IncomeController::class, 'show'])->name('income.show');
-Route::get('/incomes/{income}/edit', [IncomeController::class, 'edit'])->name('income.edit');
-Route::patch('/incomes/{income}', [IncomeController::class, 'update'])->name('income.update');
-Route::delete('/incomes/{income}', [IncomeController::class, 'destroy'])->name('income.delete');
+Route::group(['namespace' => ''], function() {
+    Route::get('/incomes', Income\IndexController::class)->name('income.index');
+    Route::get('/incomes/create', Income\CreateController::class)->name('income.create');
+    Route::post('/incomes', Income\StoreController::class)->name('income.store');
+    Route::get('/incomes/{income}', Income\ShowController::class)->name('income.show');
+    Route::get('/incomes/{income}/edit', Income\EditController::class)->name('income.edit');
+    Route::patch('/incomes/{income}', Income\UpdateController::class)->name('income.update');
+    Route::delete('/incomes/{income}', Income\DestroyController::class)->name('income.delete');
+});
+

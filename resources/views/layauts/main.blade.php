@@ -23,7 +23,10 @@
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('income_article.create') }}">Create income articles</a>
+                                <a class="nav-link" href="{{ route('income_article.index') }}">Income articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('income.index') }}">Incomes</a>
                             </li>
                         </ul>
                     </div>

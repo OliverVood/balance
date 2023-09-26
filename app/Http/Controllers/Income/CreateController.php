@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Income;
 
-use App\Http\Controllers\Controller;
 use App\Models\IncomeArticle;
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     public function __invoke()
     {

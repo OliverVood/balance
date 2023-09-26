@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Income;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\Income\StoreRequest;
 use App\Models\Income;
 
-class StoreController extends Controller
+class StoreController extends BaseController
 {
-    public function __invoke()
+    public function __invoke(StoreRequest $request)
     {
-        $data = \request()->validate([
-            'article_id' => 'integer',
-            'amount' => 'numeric'
-        ]);
-        Income::create($data);
+        $data = $request->validated();
+        $this->service->store($data);
 
         return redirect()->route('income.index');
     }

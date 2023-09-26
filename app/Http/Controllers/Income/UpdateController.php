@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Income;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\Income\UpdateRequest;
 use App\Models\Income;
 
-class UpdateController extends Controller
+class UpdateController extends BaseController
 {
-    public function __invoke(Income $income)
+    public function __invoke(UpdateRequest $request, Income $income)
     {
-        $data = \request()->validate([
-            'article_id' => 'integer',
-            'amount' => 'numeric'
-        ]);
-        $income->update($data);
+        $data = $request->validated();
+        $this->service->update($income, $data);
 
         return redirect()->route('income.show', $income->id);
     }

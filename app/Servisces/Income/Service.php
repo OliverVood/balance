@@ -15,4 +15,8 @@ class Service
     {
         $income->update($data);
     }
+
+    public function destrioy(Income $article) {
+        $article->delete();
+    }
 }

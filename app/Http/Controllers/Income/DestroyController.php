@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Income;
 
-use App\Http\Controllers\Controller;
 use App\Models\Income;
 
-class DestroyController extends Controller
+class DestroyController extends BaseController
 {
     public function __invoke(Income $article)
     {
-        $article->delete();
+        $this->service->destrioy($article);
 
         return redirect()->route('income.index');
     }

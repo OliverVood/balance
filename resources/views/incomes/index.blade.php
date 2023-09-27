@@ -4,4 +4,7 @@
     @foreach($incomes as $income)
         <div><a href="{{ route('income.show', $income->id) }}">{{ $income->amount }}</a></div>
     @endforeach
+    <div class="mt-3">
+        {{ $incomes->links() }}
+    </div>
 @endsection

@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Income;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\IncomeFilter;
+use App\Http\Requests\Income\IndexRequest;
 use App\Models\Income;
 
 class IndexController extends Controller
 {
-    public function __invoke()
+    public function __invoke(IndexRequest $request)
     {
-        $incomes = Income::paginate(10);
+        $data = $request->validated();
+        $filters = app()->make(IncomeFilter::class, ['queryParams' => array_filter($data)]);
+        $incomes = Income::filter($filters)->paginate(10);
+//        $incomes = Income::paginate(10);
         return view('incomes.index', compact('incomes'));
     }
 }

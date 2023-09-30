@@ -5,6 +5,6 @@
         <div><a href="{{ route('income.show', $income->id) }}">{{ $income->amount }}</a></div>
     @endforeach
     <div class="mt-3">
-        {{ $incomes->links() }}
+        {{ $incomes->withQueryString()->links() }}
     </div>
 @endsection

@@ -43,7 +43,7 @@ Route::group(['namespace' => ''], function() {
     Route::delete('/incomes/{income}', Income\DestroyController::class)->name('income.delete');
 });
 
-Route::group(['namespace' => '', 'prefix' => 'admin'], function() {
+Route::group(['namespace' => '', 'prefix' => 'admin', 'middleware' => 'admin'], function() {
     Route::group([], function() {
         Route::get('/income', Admin\Income\IndexController::class)->name('admin.income.index');
     });

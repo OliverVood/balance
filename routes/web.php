@@ -4,6 +4,8 @@ use App\Http\Controllers\Income;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncomeArticleController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,10 @@ Route::group(['namespace' => ''], function() {
     Route::delete('/incomes/{income}', Income\DestroyController::class)->name('income.delete');
 });
 
+Route::group(['namespace' => '', 'prefix' => 'admin'], function() {
+    Route::group([], function() {
+        Route::get('/income', Admin\Income\IndexController::class)->name('admin.income.index');
+    });
+});
+
+Route::get('/admin', [MainController::class, 'index'])->name('main.index');

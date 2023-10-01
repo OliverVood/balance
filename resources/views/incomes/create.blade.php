@@ -1,9 +1,9 @@
-@extends('layauts.main')
+@extends('layouts.main')
 @section('main')
     <div>
         <a href="{{ route('income.index') }}">List</a>
     </div>
-    <form action = "{{ route('income.store') }}" method="post">
+    <form action="{{ route('income.store') }}" method="post">
         @csrf
         <div class="mb-3">
             <label for="article" class="form-label">Article</label>

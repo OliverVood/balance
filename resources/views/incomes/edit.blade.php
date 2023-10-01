@@ -1,9 +1,9 @@
-@extends('layauts.main')
+@extends('layouts.main')
 @section('main')
     <div>
         <a href="{{ route('income.index') }}">List</a>
     </div>
-    <form action = "{{ route('income.update', $income->id) }}" method="post">
+    <form action="{{ route('income.update', $income->id) }}" method="post">
         @csrf
         @method('patch')
         <div class="mb-3">
@@ -17,7 +17,8 @@
         </div>
         <div class="mb-3">
             <label for="amount" class="form-label">Amount</label>
-            <input type="text" name="amount" class="form-control" id="amount" placeholder="Amount" value="{{ $income->amount }}">
+            <input type="text" name="amount" class="form-control" id="amount" placeholder="Amount"
+                   value="{{ $income->amount }}">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>

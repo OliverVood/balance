@@ -1,17 +1,17 @@
-@extends('layauts.main')
+@extends('layouts.main')
 @section('main')
-    <?php
-        $checkArticle = function ($tag, $article, $old) {
-            foreach ($article->tags as $articleTag) {
-                if (isset($old)) {
-                    if (in_array($tag->id, $old)) return true;
-                } else {
-                    if ($articleTag->id === $tag->id) return true;
-                }
-            }
-            return false;
-        };
-    ?>
+	<?php
+	$checkArticle = function ($tag, $article, $old) {
+		foreach ($article->tags as $articleTag) {
+			if (isset($old)) {
+				if (in_array($tag->id, $old)) return true;
+			} else {
+				if ($articleTag->id === $tag->id) return true;
+			}
+		}
+		return false;
+	};
+	?>
     <div>
         <a href="{{ route('income_article.index') }}">List</a>
     </div>
@@ -35,7 +35,8 @@
             @foreach($tags as $tag)
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->id }}" {{ $checkArticle($tag, $article, old('tags')) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" name="tags[]"
+                               value="{{ $tag->id }}" {{ $checkArticle($tag, $article, old('tags')) ? 'checked' : '' }}>
                         {{ $tag->title }}
                     </label>
                 </div>

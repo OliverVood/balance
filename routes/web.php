@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Income;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IncomeArticleController;
-use App\Http\Controllers\IncomeController;
-use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Income;
+use App\Http\Controllers\IncomeArticleController;
+use App\Http\Controllers\MainController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,11 @@ use App\Http\Controllers\Admin;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('main');
+Route::get('/home', [HomeController::class, 'index']);
+
+Auth::routes();
+//Route::get('login', [HomeController::class, 'index'])->name('login');
 
 Route::get('/income_articles', [IncomeArticleController::class, 'index'])->name('income_article.index');
 Route::get('/income_articles/create', [IncomeArticleController::class, 'create'])->name('income_article.create');
